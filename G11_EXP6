@@ -1,0 +1,13 @@
+# Procedimentos para a Exp6
+
+# Levar uma PEN com os guias e o download já prontos!!!
+
+# Compilar a nossa aplicação `download` no TUX3
+
+# No TUX3, começar a captura de pacotes com o Wireshark e correr a aplicação
+
+# Verificar se o ficheiro foi carregado com sucesso, parar as capturas e salvar as logs
+
+# Usando o Wireshark podemos avaliar vários parâmetros relativamente à conexão TCP que realizamos (parâmetros esses descritos no PPT do Lab2)
+
+# Repetir o processo feito, porém a meio do download de um ficheiro no TUX3, devemos começar um novo download no TUX2 e averiguar o que acontece com o Wireshark (salvando novamente as logs)

@@ -1,0 +1,26 @@
+# Procedimentos para a Exp1 no TUX4
+
+# Retirar todos os cabos, exceto os pretos, colocando-os nos lugares pretendidos
+# Ter também em conta onde está posicionado o S0 (de preferência deve estar posicionado para ser utilizado no TUX3)
+
+# Reiniciar o serviço de rede
+systemctl restart networking
+
+# Ativar a interface eth1
+ifconfig eth1 up
+
+# Configurar o IP da interface eth1 do TUX4
+ifconfig eth1 172.16.110.254/24
+
+# Ver o endereço MAC associado à interface eth1
+ifconfig eth1
+
+# Testar conectividade com o TUX3 (IP 172.16.110.1)
+ping 172.16.110.1 -c 20
+
+# Verificar a tabela de rotas
+route -n
+
+# NOTA: Restantes passos devem ser efetuados no TUX3!
+# Responder perguntas pós-experiência com base nos resultados
+

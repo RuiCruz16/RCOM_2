@@ -1,0 +1,50 @@
+# Procedimentos para a Exp3
+
+# Configurar e conectar o eth2 do TUX4
+ifconfig eth2 up
+ifconfig eth2 172.16.111.253/24
+
+# Adicionar o eth2 do TUX4 à bridge1
+/interface bridge port remove [find interface=ether5] # ether5 = porta 5 no Switch conectado ao eth2 do TUX4
+/interface bridge port add bridge=bridge111 interface=ether5
+
+# No TUX4, ativar IP forwarding e desativar ICMP echo ignore broadcast
+sysctl net.ipv4.ip_forward=1
+
+sysctl net.ipv4.icmp_echo_ignore_broadcasts=0
+
+# Observar MAC e IP no TUX4-eth1 e TUX4-eth2
+ifconfig
+
+# Adicionar as seguintes rotas no TUX2 e TUX3 para que estes se consigam altançar um ou outro através do TUX4
+
+# No TUX2: (Para chegar ao TUX3 usamos como gateway o TUX4)
+route add -net 172.16.110.0/24 gw 172.16.111.253
+
+# No TUX3: (Para chegar ao TUX2 usamos como gateway o TUX4)
+route add -net 172.16.111.0/24 gw 172.16.110.254
+
+# Verificar as rotas em todos os TUX
+route -n
+
+# Começar a capturar no Wireshark do TUX3
+
+# Fazer ping para os seguintes addresses a partir do TUX3
+ping 172.16.110.254
+ping 172.16.111.253
+ping 172.16.111.1
+
+# Parar a captura e salvar os logs
+
+# Começar a captura no TUX4 tanto do eth1 como do eth2 (2 Interfaces)
+
+# Limpar as tabelas ARP nos 3 TUXes
+arp -d 172.16.111.1 # no TUX4
+arp -d 172.16.110.1 # no TUX4
+arp -d 172.16.110.254 # no TUX3
+arp -d 172.16.111.253 # no TUX2
+
+# No TUX3, fazer ping para o TUX2 durante alguns segundos
+ping 172.16.111.1
+
+# Parar as capturas no TUX4 e salvar as logs
